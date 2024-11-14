@@ -23,7 +23,6 @@ export default async function ProtectedPage() {
           This is a protected page that you can only see as an authenticated
           user
         </div>
-        <Sidebar />
       </div>
       <div className="flex flex-col gap-2 items-start">
         <h2 className="font-bold text-2xl mb-4">Your user details</h2>

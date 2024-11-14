@@ -17,7 +17,11 @@ const navigationConfig = {
   // Add more role-based navigation
 };
 
-export default function Sidebar() {
+interface SidebarProps {
+  sidebarOpen: boolean;
+}
+
+export default function Sidebar({ sidebarOpen }: SidebarProps) {
   const [role, setRole] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
