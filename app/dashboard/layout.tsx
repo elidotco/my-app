@@ -2,7 +2,7 @@
 import Header from "@/components/nav/Header";
 
 import { AuthProvider } from "@/context/AuthProvider";
-import { useMemo } from "react";
+import { useMemo, useEffect, useState } from "react";
 import { useSidebar } from "../hooks/useSidebar";
 import SideBar from "@/components/nav/SideBar";
 
@@ -12,23 +12,41 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const [isLoading, setIsLoading] = useState(true);
   const { sidebarOpen, toggleSidebar } = useSidebar();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const memoizedSidebar = useMemo(
     () => <SideBar sidebarOpen={sidebarOpen} />,
     [sidebarOpen]
   );
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
+      </div>
+    );
+  }
+
   return (
-    <div className="">
+    <div className="relative min-h-screen">
       <AuthProvider>
         {memoizedSidebar}
         <div
-          className={`flex-1 transition-all w-56 duration-300 ease-in-out ${
+          className={`transition-all duration-300 ease-in-out ${
             sidebarOpen ? "ml-16" : "ml-[230px]"
-          } min-h-screen`}
+          }`}
         >
-          {/* Header */}
           <Header setSidebarOpen={toggleSidebar} sidebarOpen={sidebarOpen} />
-          <div className="w-full flex pt-25 p-8">{children}</div>
+          <main className="p-8">{children}</main>
         </div>
       </AuthProvider>
     </div>

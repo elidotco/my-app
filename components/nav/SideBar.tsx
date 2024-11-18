@@ -225,7 +225,7 @@ const SideBar: React.FC<SideBarProps> = ({ sidebarOpen }) => {
                       className={`p-[10px] bg-primesidecolor text-opacity-80 group-hover:text-[#ff5714] ${
                         activeDropdown === nav.name ? "text-[#ff5714]" : ""
                       } rounded-[3px] ${
-                        sidebarOpen ? "mx-auto" : ""
+                        sidebarOpen ? "mx-auto" : "ml-3"
                       } text-[#707887]`}
                     >
                       <nav.icon className="w-5 h-5" size={18} />
@@ -270,13 +270,13 @@ const SideBar: React.FC<SideBarProps> = ({ sidebarOpen }) => {
             return (
               <li key={nav.name} className="py-2 relative group">
                 <Link href={nav.path}>
-                  <div className="flex items-center  gap-3">
+                  <div className="flex items-center   gap-3">
                     <div
                       className={`p-[10px] ${
                         pathname.includes(nav.path)
                           ? "bg-[#ff5714] text-white"
                           : "bg-primesidecolor text-[#707887] group-hover:text-[#ff5714]"
-                      } rounded-[3px] ${sidebarOpen ? "mx-auto" : ""}`}
+                      } rounded-[3px] ${sidebarOpen ? "mx-auto" : "ml-3"}`}
                     >
                       <nav.icon className="w-5 h-5" size={18} />
                     </div>

@@ -34,6 +34,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   useEffect(() => {
     const fetchUser = async () => {
       setLoading(true);
+
+      const loadingPromise = new Promise((resolve) =>
+        setTimeout(resolve, 2000)
+      );
+
       const {
         data: { user },
         error,
@@ -42,7 +47,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       if (user) {
         setUser(user);
         if (user.email) {
-          fetchEmployeeData(user.email); // Fetch employee data after user is set
+          await fetchEmployeeData(user.email);
         }
       } else if (error) {
         console.error("Error fetching user:", error);
@@ -52,6 +57,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         router.push("/sign-in");
       }
 
+      await loadingPromise;
       setLoading(false);
     };
 
@@ -84,9 +90,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         }
       }
     );
-
     return () => {
-      subscription?.unsubscribe();
+      subscription?.subscription.unsubscribe();
     };
   }, [supabase, pathname, router]);
 
