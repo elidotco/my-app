@@ -8,8 +8,7 @@ import PunchInOutButton from "@/components/buttons/PunchButton";
 
 const Home = () => {
   const { user, employeeData, loading } = useAuth();
-  console.log(user);
-  console.log(employeeData);
+
   const [emp, setEmp] = useState(employeeData?.role);
   const [emps, setEmps] = useState(employeeData?.role);
 

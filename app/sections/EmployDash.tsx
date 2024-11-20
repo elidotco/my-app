@@ -8,6 +8,8 @@ import dayjs from "dayjs";
 import { createClient } from "@/utils/supabase/client";
 import { useAuth } from "@/context/AuthProvider";
 import Loader from "@/components/Loader";
+import { RealtimeChannel } from "@supabase/supabase-js";
+import TimeLog from "@/components/TimeLog";
 
 const EmployDash = ({ name }: { name: string }) => {
   const { employeeData } = useAuth();
@@ -36,8 +38,7 @@ const EmployDash = ({ name }: { name: string }) => {
         console.error("Error fetching time logs:", error.message);
         return;
       }
-
-      setTimeLogs(data as any[]); // Update logs
+      setTimeLogs(data || []); // Update logs with empty array fallback
     } catch (error) {
       console.error("Unexpected error:", error);
     } finally {
@@ -117,7 +118,11 @@ const EmployDash = ({ name }: { name: string }) => {
                 <p className="text-red-500 mt-2">
                   You are 3 hours and 6 minutes late!
                 </p>
-
+                {timeLogs.length > 1 ? (
+                  <p className="text-green-500">
+                    You have multiple Time Logs today!! this is your latest
+                  </p>
+                ) : null}
                 <div className="flex space-x-10 mt-6">
                   {timeLogs.length > 0 ? (
                     <>
@@ -220,53 +225,7 @@ const EmployDash = ({ name }: { name: string }) => {
         </div>
 
         {/* Right Side: Time Log */}
-        <div className="lg:w-[29%] w-full bg-white rounded-sm shadow-md">
-          <div className="border-b py-6 px-6">
-            <h2 className="text-lg font-semibold">Time Log</h2>
-          </div>
-          <div className="mt-4 mx-6">
-            <div className="border-b pt-5">
-              <p className="text-gray-600">Today</p>
-            </div>
-            <div className="flex justify-between text-sm mt-2">
-              <p>08:00 Scheduled</p>
-              <p>06:00 Worked</p>
-              <p>00:00 Break</p>
-              <p>-2:00 Balance</p>
-            </div>
-          </div>
-          <div className="mt-6 mx-6">
-            <div className="border-b px-6">
-              {" "}
-              <p className="text-gray-600">This month</p>
-            </div>
-            <div className="mt-2 pb-5 flex items-center">
-              <div className="flex justify-center rounded-sm mr-2 items-center p-3 bg-[#ff5714]">
-                <ClockIcon className="w-6 h-6 text-slate-50" />
-              </div>
-              <div className="flex flex-col text-left">
-                <p className=" text-xl">176 h</p>
-                <p className="text-gray-500">Total schedule time</p>
-              </div>
-            </div>
-            <div className="mt-4">
-              <p className="text-sm text-gray-600">Worked time - 218 h</p>
-              <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
-                <div
-                  className="bg-[#ff5714] h-2 rounded-full"
-                  style={{ width: "100%" }}
-                ></div>
-              </div>
-              <p className="text-sm text-gray-600 mt-2">Shortage time - 0 m</p>
-              <div className="w-full bg-gray-200 rounded-full h-2 mt-1"></div>
-              <p className="text-sm text-gray-600 mt-2">Over time - 50 h</p>
-              <div
-                className="w-full bg-[#ff5714] rounded-full h-2 mt-1"
-                style={{ width: "25%" }}
-              ></div>
-            </div>
-          </div>
-        </div>
+        <TimeLog />
       </div>
 
       <div className=" pt-20 flex w-full min-h-screen">

@@ -9,7 +9,6 @@ const PunchInOutButton = () => {
   const [isPunchInMode, setIsPunchInMode] = useState(true); // Track punch-in or punch-out mode
   const supabase = createClient();
   const { employeeData } = useAuth();
-  console.log(employeeData);
 
   // Check if there's an existing punch-in without a punch-out
   const checkOpenPunchIn = async () => {

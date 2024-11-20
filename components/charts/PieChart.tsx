@@ -14,7 +14,6 @@ const PieChart = () => {
 
   const fetchAttendanceData = async () => {
     const { data, error } = await supabase.from("attendance").select("status"); // Assuming 'status' column has values like 'Early', 'Late', 'Regular'
-    console.log(data);
 
     if (error) {
       console.error("Error fetching attendance data:", error);
@@ -34,7 +33,6 @@ const PieChart = () => {
     setAttendanceData([counts.Early, counts.Late, counts.Regular]);
     setTotalAttendance(counts.Early + counts.Late + counts.Regular);
   };
-  console.log(attendanceData);
 
   useEffect(() => {
     fetchAttendanceData();

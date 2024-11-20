@@ -72,7 +72,7 @@ const AdminDash = ({ role }: { role: string }) => {
     );
   }
 
-  console.log(data);
+
   return (
     <>
       <div className="flex pt-10 lg:px-0 px-10  md:flex-row flex-col gap-y-4 items-center justify-between w-full">
