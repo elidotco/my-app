@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { ComponentType, useEffect, useState } from "react";
 import StatsCard from "@/components/cards/StatsCard";
 import { HomeIcon } from "@heroicons/react/16/solid";
 import { FiUser, FiUserX } from "react-icons/fi";
@@ -72,7 +72,6 @@ const AdminDash = ({ role }: { role: string }) => {
     );
   }
 
-
   return (
     <>
       <div className="flex pt-10 lg:px-0 px-10  md:flex-row flex-col gap-y-4 items-center justify-between w-full">
@@ -84,13 +83,23 @@ const AdminDash = ({ role }: { role: string }) => {
         {role !== "Department Manager" && (
           <StatsCard
             num={data?.totalDepartments}
-            Icons={HomeIcon}
+            Icons={
+              HomeIcon as unknown as ComponentType<{
+                size: number;
+                className: string;
+              }>
+            }
             name="Total Departments"
           />
         )}
         <StatsCard
           num={data?.totalLeaveRequests}
-          Icons={PencilSquareIcon}
+          Icons={
+            PencilSquareIcon as unknown as ComponentType<{
+              size: number;
+              className: string;
+            }>
+          }
           name="Total leave requests"
         />
         <StatsCard

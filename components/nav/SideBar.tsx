@@ -10,6 +10,8 @@ import {
 } from "@heroicons/react/24/solid";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { fromJSON } from "postcss";
+import { useAuth } from "@/context/AuthProvider";
 
 interface NavItem {
   name: string;
@@ -25,6 +27,7 @@ interface SideBarProps {
 const SideBar: React.FC<SideBarProps> = ({ sidebarOpen }) => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const pathname = usePathname();
+  const { employeeData } = useAuth();
 
   const navdata: NavItem[] = [
     {
@@ -35,7 +38,7 @@ const SideBar: React.FC<SideBarProps> = ({ sidebarOpen }) => {
     {
       name: "Job Desk",
       icon: FiUser,
-      path: "/employee",
+      path: `/employee/${employeeData?.employeeid}? tab=leave allowance`,
     },
     {
       name: "Employee",

@@ -2,8 +2,8 @@
 import { useAuth } from "@/context/AuthProvider";
 import Link from "next/link";
 import React, { useState } from "react";
-import AdminDash from "../sections/AdminDash";
-import EmployDash from "../sections/EmployDash";
+import AdminDash from "../../sections/AdminDash";
+import EmployDash from "../../sections/EmployDash";
 import PunchInOutButton from "@/components/buttons/PunchButton";
 
 const Home = () => {

@@ -11,10 +11,15 @@ import Loader from "@/components/Loader";
 import { RealtimeChannel } from "@supabase/supabase-js";
 import TimeLog from "@/components/TimeLog";
 
+interface TimeLogs {
+  punchin: string;
+  punchout: string;
+  hours_worked: number;
+}
 const EmployDash = ({ name }: { name: string }) => {
   const { employeeData } = useAuth();
   const supabase = createClient();
-  const [timeLogs, setTimeLogs] = useState([]);
+  const [timeLogs, setTimeLogs] = useState<TimeLogs[]>([]);
   const [loading, setLoading] = useState(true); // State for loader
   const [realTimeSubscription, setRealTimeSubscription] =
     useState<RealtimeChannel | null>(null); // For real-time updates
@@ -29,7 +34,7 @@ const EmployDash = ({ name }: { name: string }) => {
       setLoading(true); // Show loader while fetching
       const { data, error } = await supabase
         .from("attendance")
-        .select("punchin, punchout")
+        .select("punchin, punchout, hours_worked")
         .eq("employeeid", employeeData.employeeid)
         .eq("date", today)
         .order("punchin", { ascending: false });
@@ -223,12 +228,11 @@ const EmployDash = ({ name }: { name: string }) => {
             </div>
           </div>
         </div>
-
         {/* Right Side: Time Log */}
-        <TimeLog />
+        <TimeLog logs={timeLogs} />
       </div>
 
-      <div className=" pt-20 flex w-full min-h-screen">
+      <div className="pt-20 flex w-full min-h-screen">
         {/* <Table columns={columns} data={[]} /> */}
       </div>
       {/* Additional Time Log Details */}
