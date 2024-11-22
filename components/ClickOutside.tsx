@@ -2,16 +2,9 @@ import React, { useRef, useEffect, ReactNode, RefObject } from "react";
 
 interface ClickOutsideProps {
   children: ReactNode;
-  exceptionRef?: RefObject<HTMLElement>;
-  onClick: () => void;
-  className?: string;
-}
-
-interface ClickOutsideProps {
-  children: React.ReactNode;
-  handler: () => void;
-  exceptionRef?: React.RefObject<HTMLElement>;
-  className?: string;
+  handler: () => void; // Callback when clicking outside
+  exceptionRef?: RefObject<HTMLElement>; // Optional element that won't trigger the handler
+  className?: string; // Optional class for styling
 }
 
 const ClickOutside: React.FC<ClickOutsideProps> = ({
@@ -24,21 +17,14 @@ const ClickOutside: React.FC<ClickOutsideProps> = ({
 
   useEffect(() => {
     const handleClickListener = (event: MouseEvent) => {
-      let clickedInside = false;
-      if (exceptionRef) {
-        clickedInside = Boolean(
-          (wrapperRef.current &&
-            wrapperRef.current.contains(event.target as Node)) ||
-            (exceptionRef.current && exceptionRef.current === event.target) ||
-            (exceptionRef.current &&
-              exceptionRef.current.contains(event.target as Node))
-        );
-      } else {
-        clickedInside = Boolean(
-          wrapperRef.current &&
-            wrapperRef.current.contains(event.target as Node)
-        );
-      }
+      const clickedInside = Boolean(
+        (wrapperRef.current &&
+          wrapperRef.current.contains(event.target as Node)) ||
+          (exceptionRef &&
+            ((exceptionRef.current && exceptionRef.current === event.target) ||
+              (exceptionRef.current &&
+                exceptionRef.current.contains(event.target as Node))))
+      );
 
       if (!clickedInside) handler();
     };
