@@ -52,9 +52,8 @@ const BarChart = () => {
         console.error(error);
         return;
       }
-
       // Get unique designations and their counts
-      newLabels = [...new Set(designations.map((d) => d.designation))];
+      newLabels = Array.from(new Set(designations.map((d) => d.designation)));
       newData = newLabels.map(
         (designation) =>
           designations.filter((d) => d.designation === designation).length
@@ -70,9 +69,8 @@ const BarChart = () => {
         console.error(error);
         return;
       }
-
       // Get unique departments and their counts
-      newLabels = [...new Set(departments.map((d) => d.department))];
+      newLabels = Array.from(new Set(departments.map((d) => d.department)));
       newData = newLabels.map(
         (department) =>
           departments.filter((d) => d.department === department).length
