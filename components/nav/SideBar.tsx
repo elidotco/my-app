@@ -38,7 +38,7 @@ const SideBar: React.FC<SideBarProps> = ({ sidebarOpen }) => {
     {
       name: "Job Desk",
       icon: FiUser,
-      path: `/employee/${employeeData?.employeeid}? tab=leave allowance`,
+      path: `/employee/${employeeData?.id}/profile?tab=leave allowance`,
     },
     {
       name: "Employee",

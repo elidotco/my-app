@@ -4,10 +4,7 @@ import { PiBuildingLight } from "react-icons/pi";
 
 const JobHistory = () => {
   return (
-    <div className=" w-full h-full">
-      <div className="w-full p-10 h-[13%]  border-b">
-        <p className="text-2xl font-medium">Job History</p>
-      </div>
+    <>
       <div className="flex flex-col space-y-8 w-full p-8 rounded-md ">
         {/* Department Section */}
         <div className="flex  space-x-4">
@@ -26,7 +23,7 @@ const JobHistory = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
