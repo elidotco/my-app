@@ -1,4 +1,5 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
+import { headers } from "next/headers";
 const productData = [
   {
     date: "hello",
@@ -50,7 +51,7 @@ const productData = [
   },
 ];
 
-const getGridColsClass = (cols) => {
+const getGridColsClass = (cols: number) => {
   switch (cols) {
     case 1:
       return "grid-cols-1";
@@ -76,7 +77,7 @@ const getGridColsClass = (cols) => {
       return "grid-cols-1"; // fallback to 1 column if not specified
   }
 };
-const TableOne = ({ cols, headers }) => {
+const TableOne = ({ cols, headers }: { cols: number; headers: string[] }) => {
   const gridsnum = getGridColsClass(cols);
   return (
     <div className="rounded-sm   border-stroke bg-white  dark:border-strokedark dark:bg-boxdark">

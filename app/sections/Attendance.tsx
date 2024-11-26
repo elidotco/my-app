@@ -44,19 +44,21 @@ const Attendance = () => {
         </div>
         <TableTwo
           cols={10}
-          headers={[
-            "Date",
-            "Punched in",
-            "In Geolocation",
-            "Punched Out",
-            "Out Geolocation",
-            "Behavior",
-            "Type",
-            "Break time",
-            "Total hours",
-            "Entry",
-            ,
-          ]}
+          headers={
+            [
+              "Date",
+              "Punched in",
+              "In Geolocation",
+              "Punched Out",
+              "Out Geolocation",
+              "Behavior",
+              "Type",
+              "Break time",
+              "Total hours",
+              "Entry",
+              ,
+            ] as string[]
+          }
         />
       </div>
     </>
